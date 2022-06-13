@@ -1,13 +1,17 @@
-import { DefaultTheme } from "@react-navigation/native";
+import {DefaultTheme} from '@react-navigation/native';
 
 export const theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    success: '#0be76e',
+    green: '#0be76e',
     error: '#d91212',
     white: '#FFFFFF',
-    backgroundColorDefault: '#d8dde7',
-    borderColor: 'rgba(217,127,205,0.5)',
+    backgroundColorDefault: '#1bd739',
+    borderColor: 'rgba(114,3,99,0.5)',
+    black: '#050000',
+    grey: '#797575',
+    bgColor: '#fae9ae',
+    fgColor: '#dd4d44',
   },
 };

@@ -1,8 +1,8 @@
-import * as React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "../../Screens/Home";
-import { theme } from "../../Styles/theme";
-import { Button } from "react-native-paper";
+import * as React from 'react';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {theme} from '../../Styles/theme';
+import {Button} from 'react-native-paper';
+import Home from '../../Screens/Home';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,9 +15,7 @@ export const HomeStack = () => {
         options={() => ({
           headerTitle: 'Users',
           headerRight: () => (
-            <Button
-              color={theme.colors.primary}
-              onPress={() => alert('Exit')}>
+            <Button color={theme.colors.primary} onPress={() => alert('Exit')}>
               Выйти
             </Button>
           ),
@@ -25,4 +23,4 @@ export const HomeStack = () => {
       />
     </Stack.Navigator>
   );
-}
+};
