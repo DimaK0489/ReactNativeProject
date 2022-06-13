@@ -4,7 +4,7 @@ import styles from './styles';
 
 interface Props {
   value: string;
-  setValue: () => void;
+  setValue: (text: string) => void;
   placeholder: string;
   secureTextEntry?: boolean | undefined;
 }

@@ -1,39 +1,39 @@
-import * as React from 'react';
-import {View, Image, useWindowDimensions, Text} from 'react-native';
-import Logo from '../../Assets/Images/Logo.jpg';
-import styles from './styles';
+import React, {useState} from 'react';
+import {Text, View} from 'react-native';
+import {styles} from './styles';
 import CustomInput from '../../Components/CustomInput';
-import {useState} from 'react';
 import CustomButton from '../../Components/CustomButton';
 import {theme} from '../../Styles/theme';
 
-const Login = () => {
-  const {height} = useWindowDimensions();
+const SignUp = () => {
   const [userName, setUserName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordRepeat, setPasswordRepeat] = useState('');
   return (
     <View style={styles.container}>
-      <Image
-        style={[styles.logo, {height: height * 0.3}]}
-        source={Logo}
-        resizeMode={'contain'}
-      />
+      <Text style={styles.title}>Create an account</Text>
       <CustomInput
         placeholder={'Username'}
         value={userName}
         setValue={setUserName}
       />
+      <CustomInput placeholder={'Email'} value={email} setValue={setEmail} />
       <CustomInput
         placeholder={'Password'}
         value={password}
         setValue={setPassword}
         secureTextEntry={true}
       />
-      <CustomButton title={'Sign In'} onPress={() => alert('successful')} />
+      <CustomInput
+        placeholder={'PasswordRepeat'}
+        value={passwordRepeat}
+        setValue={setPasswordRepeat}
+        secureTextEntry={true}
+      />
       <CustomButton
-        title={'Forgot password'}
-        onPress={() => alert('Forgot password')}
-        type="TERTIARY"
+        title={'Registration'}
+        onPress={() => alert('successful')}
       />
       <CustomButton
         title={'Sign in with google'}
@@ -41,8 +41,7 @@ const Login = () => {
         bgColor={theme.colors.bgColor}
         fgColor={theme.colors.fgColor}
       />
-      <Text>Don`t have an account? Create one.</Text>
     </View>
   );
 };
-export default Login;
+export default SignUp;
