@@ -12,6 +12,10 @@ export const styles = StyleSheet.create({
   container_PRIMARY: {
     backgroundColor: theme.colors.primary,
   },
+  container_SECONDARY: {
+    borderColor: theme.colors.black,
+    borderWidth: 2,
+  },
   container_TERTIARY: {},
   text: {
     fontSize: 17,
@@ -19,6 +23,9 @@ export const styles = StyleSheet.create({
     color: theme.colors.black,
   },
   text_TERTIARY: {
+    color: theme.colors.grey,
+  },
+  text_SECONDARY: {
     color: theme.colors.grey,
   },
 });

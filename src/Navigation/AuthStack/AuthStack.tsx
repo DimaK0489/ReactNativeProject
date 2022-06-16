@@ -1,8 +1,7 @@
 import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Login from '../../Screens/Login';
-import SignUp from '../../Screens/SignUp';
 import ConfirmEmail from '../../Screens/ConfirmEmail';
+import ForgotPassword from '../../Screens/ForgotPassword';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,11 +22,18 @@ export default function AuthStack() {
           title: 'Sign Up Screen',
         }}
       />*/}
-      <Stack.Screen
+      {/*<Stack.Screen
         name={'Confirm Email'}
         component={ConfirmEmail}
         options={{
           title: 'Confirm Email Screen',
+        }}
+      />*/}
+      <Stack.Screen
+        name={'Forgot Password'}
+        component={ForgotPassword}
+        options={{
+          title: 'Forgot Password Screen',
         }}
       />
     </Stack.Navigator>
