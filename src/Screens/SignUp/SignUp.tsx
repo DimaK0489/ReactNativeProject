@@ -4,8 +4,10 @@ import {styles} from './styles';
 import CustomInput from '../../Components/CustomInput';
 import CustomButton from '../../Components/CustomButton';
 import {theme} from '../../Styles/theme';
+import {useNavigation} from '@react-navigation/native';
 
 const SignUp = () => {
+  const navigation = useNavigation();
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,7 +35,12 @@ const SignUp = () => {
       />
       <CustomButton
         title={'Registration'}
-        onPress={() => alert('successful')}
+        onPress={() => navigation.navigate('ConfirmEmail')}
+      />
+      <CustomButton
+        title={'Sign In'}
+        onPress={() => navigation.navigate('SignIn')}
+        type="SECONDARY"
       />
       <CustomButton
         title={'Sign in with google'}

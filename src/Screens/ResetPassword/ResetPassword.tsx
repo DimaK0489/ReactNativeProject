@@ -5,18 +5,27 @@ import CustomButton from '../../Components/CustomButton';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
 
-const ConfirmEmail = () => {
+const ResetPassword = () => {
   const navigation = useNavigation();
   const [code, setCode] = useState('');
+  const [newPassword, setNewPassword] = useState('');
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Confirm your email</Text>
+      <Text style={styles.title}>Reset your password</Text>
       <CustomInput
-        placeholder={'Enter your confirmation code'}
+        placeholder={'Enter your email'}
         value={code}
         setValue={setCode}
       />
-      <CustomButton title={'Confirm'} onPress={() => navigation.navigate('HomeStack')} />
+      <CustomInput
+        placeholder={'New your password'}
+        value={newPassword}
+        setValue={setNewPassword}
+      />
+      <CustomButton
+        title={'Submit'}
+        onPress={() => navigation.navigate('HomeStack')}
+      />
       <CustomButton
         title={'Back to Sign in'}
         onPress={() => navigation.navigate('SignIn')}
@@ -25,4 +34,4 @@ const ConfirmEmail = () => {
     </View>
   );
 };
-export default ConfirmEmail;
+export default ResetPassword;

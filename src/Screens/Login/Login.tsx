@@ -6,8 +6,10 @@ import CustomInput from '../../Components/CustomInput';
 import {useState} from 'react';
 import CustomButton from '../../Components/CustomButton';
 import {theme} from '../../Styles/theme';
+import {useNavigation} from '@react-navigation/native';
 
 const Login = () => {
+  const navigation = useNavigation();
   const {height} = useWindowDimensions();
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
@@ -29,19 +31,22 @@ const Login = () => {
         setValue={setPassword}
         secureTextEntry={true}
       />
-      <CustomButton title={'Sign In'} onPress={() => alert('successful')} />
       <CustomButton
-        title={'Forgot password'}
-        onPress={() => alert('Forgot password')}
-        type="TERTIARY"
+        title={'Sign In'}
+        onPress={() => navigation.navigate('HomeStack')}
       />
       <CustomButton
-        title={'Sign in with google'}
-        onPress={() => alert('Google')}
+        title={'Forgot password'}
+        onPress={() => navigation.navigate('ForgotPassword')}
+        type="SECONDARY"
+      />
+      <CustomButton
+        title={'Sign Up'}
+        onPress={() => navigation.navigate('SignUp')}
         bgColor={theme.colors.bgColor}
         fgColor={theme.colors.fgColor}
       />
-      <Text>Don`t have an account? Create one.</Text>
+      <Text style={styles.text}>Don`t have an account? Create one.</Text>
     </View>
   );
 };
