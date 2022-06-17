@@ -4,6 +4,7 @@ import CustomInput from '../../Components/CustomInput';
 import CustomButton from '../../Components/CustomButton';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
+import {SCREEN} from '../../Navigation/Constants/screens';
 
 const ForgotPassword = () => {
   const navigation = useNavigation();
@@ -18,11 +19,11 @@ const ForgotPassword = () => {
       />
       <CustomButton
         title={'Send'}
-        onPress={() => navigation.navigate('ResetPassword')}
+        onPress={() => navigation.navigate(SCREEN.RESET_PASSWORD)}
       />
       <CustomButton
         title={'Back to Sign in'}
-        onPress={() => navigation.navigate('SignIn')}
+        onPress={() => navigation.navigate(SCREEN.SIGN_IN)}
         type={'SECONDARY'}
       />
     </View>

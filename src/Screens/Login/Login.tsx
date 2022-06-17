@@ -7,6 +7,8 @@ import {useState} from 'react';
 import CustomButton from '../../Components/CustomButton';
 import {theme} from '../../Styles/theme';
 import {useNavigation} from '@react-navigation/native';
+import {STACK, stacks} from '../../Navigation/Constants/stacks';
+import {SCREEN} from '../../Navigation/Constants/screens';
 
 const Login = () => {
   const navigation = useNavigation();
@@ -33,16 +35,16 @@ const Login = () => {
       />
       <CustomButton
         title={'Sign In'}
-        onPress={() => navigation.navigate('HomeStack')}
+        onPress={() => navigation.navigate(stacks[STACK.HOME])}
       />
       <CustomButton
         title={'Forgot password'}
-        onPress={() => navigation.navigate('ForgotPassword')}
+        onPress={() => navigation.navigate(SCREEN.FORGOT_PASSWORD)}
         type="SECONDARY"
       />
       <CustomButton
         title={'Sign Up'}
-        onPress={() => navigation.navigate('SignUp')}
+        onPress={() => navigation.navigate(SCREEN.SIGN_UP)}
         bgColor={theme.colors.bgColor}
         fgColor={theme.colors.fgColor}
       />

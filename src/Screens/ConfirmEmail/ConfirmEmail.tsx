@@ -4,6 +4,8 @@ import CustomInput from '../../Components/CustomInput';
 import CustomButton from '../../Components/CustomButton';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
+import {STACK, stacks} from '../../Navigation/Constants/stacks';
+import {SCREEN} from '../../Navigation/Constants/screens';
 
 const ConfirmEmail = () => {
   const navigation = useNavigation();
@@ -16,10 +18,13 @@ const ConfirmEmail = () => {
         value={code}
         setValue={setCode}
       />
-      <CustomButton title={'Confirm'} onPress={() => navigation.navigate('HomeStack')} />
+      <CustomButton
+        title={'Confirm'}
+        onPress={() => navigation.navigate(stacks[STACK.HOME])}
+      />
       <CustomButton
         title={'Back to Sign in'}
-        onPress={() => navigation.navigate('SignIn')}
+        onPress={() => navigation.navigate(SCREEN.SIGN_IN)}
         type={'SECONDARY'}
       />
     </View>

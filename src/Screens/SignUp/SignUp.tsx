@@ -5,6 +5,7 @@ import CustomInput from '../../Components/CustomInput';
 import CustomButton from '../../Components/CustomButton';
 import {theme} from '../../Styles/theme';
 import {useNavigation} from '@react-navigation/native';
+import {SCREEN} from '../../Navigation/Constants/screens';
 
 const SignUp = () => {
   const navigation = useNavigation();
@@ -35,11 +36,11 @@ const SignUp = () => {
       />
       <CustomButton
         title={'Registration'}
-        onPress={() => navigation.navigate('ConfirmEmail')}
+        onPress={() => navigation.navigate(SCREEN.CONFIRM_EMAIL)}
       />
       <CustomButton
         title={'Sign In'}
-        onPress={() => navigation.navigate('SignIn')}
+        onPress={() => navigation.navigate(SCREEN.SIGN_IN)}
         type="SECONDARY"
       />
       <CustomButton
