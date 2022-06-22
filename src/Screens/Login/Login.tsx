@@ -48,7 +48,11 @@ const Login = () => {
         bgColor={theme.colors.bgColor}
         fgColor={theme.colors.fgColor}
       />
-      <Text style={styles.text}>Don`t have an account? Create one.</Text>
+      <CustomButton
+        title={'Don`t have an account? Create one.'}
+        onPress={() => navigation.navigate(SCREEN.SIGN_UP)}
+        type="TERTIARY"
+      />
     </View>
   );
 };
