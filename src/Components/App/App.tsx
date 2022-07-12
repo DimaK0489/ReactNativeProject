@@ -4,12 +4,16 @@ import {GlobalStack} from '../../Navigation/GlobalStack/GlobalStack';
 import {Provider as PaperProvider} from 'react-native-paper';
 import {StyleSheet} from 'react-native';
 import {theme} from '../../Styles/theme';
+import {Provider} from 'react-redux';
+import {store} from '../../Store';
 
 function App() {
   return (
     <SafeAreaProvider style={styles.root}>
       <PaperProvider>
-        <GlobalStack />
+        <Provider store={store}>
+          <GlobalStack />
+        </Provider>
       </PaperProvider>
     </SafeAreaProvider>
   );

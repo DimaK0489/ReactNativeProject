@@ -1,27 +1,44 @@
 import * as React from 'react';
-import {View, Image, useWindowDimensions} from 'react-native';
+import {useState} from 'react';
+import {Alert, Image, useWindowDimensions, View} from 'react-native';
 import Logo from '../../Assets/Images/Logo.jpg';
 import styles from './styles';
 import CustomInput from '../../Components/CustomInput';
 import CustomButton from '../../Components/CustomButton';
 import {theme} from '../../Styles/theme';
 import {useNavigation} from '@react-navigation/native';
-import {STACK, stacks} from '../../Navigation/Constants/stacks';
 import {SCREEN} from '../../Navigation/Constants/screens';
 import {useForm} from 'react-hook-form';
+import {Checkbox} from 'react-native-paper';
+import {useDispatch} from '../../Utils/Hooks';
+import {useLoginMutation} from '../../Api/Authentication';
+import {updateAccessToken} from '../../Store/AuthSlice';
+import {STACK, stacks} from '../../Navigation/Constants/stacks';
 
 const Login = () => {
   const navigation = useNavigation();
   const {height} = useWindowDimensions();
+  const dispatch = useDispatch();
+  const [login, {isLoading}] = useLoginMutation();
+  const [rememberMe, setRememberMe] = useState(false);
   const {
     control,
     handleSubmit,
     formState: {errors},
   } = useForm();
-  const onSubmit = (data: any) => {
-    console.log(data);
-    navigation.navigate(stacks[STACK.HOME]);
+  const onSubmit = async () => {
+    try {
+      console.log(control._formValues);
+      const userData = await login(control._formValues && rememberMe).unwrap();
+      console.log(userData);
+      dispatch(updateAccessToken({...userData}));
+      navigation.navigate(stacks[STACK.HOME]);
+    } catch (err) {
+      Alert.alert('Не удалось войти', 'Неправильное имя или пароль');
+      console.log('error', err);
+    }
   };
+
   return (
     <View style={styles.container}>
       <Image
@@ -48,6 +65,13 @@ const Login = () => {
           },
         }}
       />
+      <Checkbox
+        status={rememberMe ? 'checked' : 'unchecked'}
+        onPress={() => {
+          setRememberMe(!rememberMe);
+        }}
+      />
+
       <CustomButton title={'Sign In'} onPress={handleSubmit(onSubmit)} />
       <CustomButton
         title={'Forgot password'}
