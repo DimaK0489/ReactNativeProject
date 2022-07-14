@@ -5,16 +5,15 @@ import {
 } from '@reduxjs/toolkit/query';
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {RootState} from '../Store';
-import {logout, updateAccessToken} from '../Store/AuthSlice';
+import {logout, setCredentials} from '../Store/AuthSlice';
 
-const {REACT_APP_API_URL} = process.env;
-export const baseURL = `${REACT_APP_API_URL}`;
+export const baseURL = process.env.REACT_APP_API_URL;
 
 const baseQuery = fetchBaseQuery({
   baseUrl: baseURL,
   credentials: 'include',
   prepareHeaders: (headers, {getState}) => {
-    const token = (getState() as RootState).auth.accessToken;
+    const token = (getState() as RootState).auth.token;
     if (token) {
       headers.set('Authorization', `Bearer ${token}`);
     }
@@ -31,7 +30,10 @@ const baseQueryWithReauth: BaseQueryFn<
     console.log('sending refresh token');
     const refreshResult = await baseQuery('/refreshToken', api, extraOptions);
     if (refreshResult.data) {
-      api.dispatch(updateAccessToken({token: refreshResult.data as string}));
+      // @ts-ignore
+      const user = api.getState().auth.user;
+      api.dispatch(setCredentials({token: refreshResult.data as string, user}));
+      //api.dispatch(setCredentials({...refreshResult.data as string, user}));
       result = await baseQuery(args, api, extraOptions);
     } else {
       api.dispatch(logout());
