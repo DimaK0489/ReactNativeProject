@@ -13,6 +13,7 @@ import {useLoginMutation} from '../../Api/Authentication';
 import {setCredentials} from '../../Store/AuthSlice';
 import CustomCheckbox from '../../Components/CustomCheckbox';
 import Preloader from '../../Components/Preloader';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = () => {
   const navigation = useNavigation();
@@ -28,10 +29,7 @@ const Login = () => {
         rememberMe: control._formValues.rememberMe,
       }).unwrap();
       dispatch(setCredentials({...userData}));
-      // await AsyncStorage.setItem(
-      //   'token',
-      //   (userData as {data: {token: string}}).data.token,
-      // );
+      await AsyncStorage.setItem('token', userData.token);
     } catch (err) {
       Alert.alert('Failed to login', 'Wrong username or password');
       console.log('error', err);

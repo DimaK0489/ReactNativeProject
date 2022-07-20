@@ -1,5 +1,5 @@
 import {apiSlice} from './Api';
-import {LoginType, RegistrationDataType} from '../Types';
+import {LoginType, RegistrationDataType} from '../Common/Types/Types';
 
 export const Authentication = apiSlice.injectEndpoints({
   endpoints: builder => ({

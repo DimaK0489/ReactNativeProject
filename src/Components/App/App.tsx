@@ -5,14 +5,17 @@ import {Provider as PaperProvider} from 'react-native-paper';
 import {StyleSheet} from 'react-native';
 import {theme} from '../../Styles/theme';
 import {Provider} from 'react-redux';
-import {store} from '../../Store';
+import {persistor, store} from '../../Store';
+import {PersistGate} from 'redux-persist/integration/react';
 
 function App() {
   return (
     <SafeAreaProvider style={styles.root}>
       <PaperProvider>
         <Provider store={store}>
-          <GlobalStack />
+          <PersistGate loading={null} persistor={persistor}>
+            <GlobalStack />
+          </PersistGate>
         </Provider>
       </PaperProvider>
     </SafeAreaProvider>
