@@ -9,14 +9,18 @@ import {selectToken} from '../../Store/AuthSlice';
 const Stack = createNativeStackNavigator();
 
 export const GlobalStack = () => {
-  //const token = useSelector(selectToken);
+  const token = useSelector(selectToken);
+  console.log(token);
   return (
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="AuthStack"
         screenOptions={{headerShown: false}}>
-        <Stack.Screen name={'HomeStack'} component={HomeStack} />
-        <Stack.Screen name={'AuthStack'} component={AuthStack} />
+        {token ? (
+          <Stack.Screen name={'HomeStack'} component={HomeStack} />
+        ) : (
+          <Stack.Screen name={'AuthStack'} component={AuthStack} />
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Alert, Text, View} from 'react-native';
 import {styles} from './styles';
 import CustomInput from '../../Components/CustomInput';
 import CustomButton from '../../Components/CustomButton';
@@ -8,43 +8,44 @@ import {useNavigation} from '@react-navigation/native';
 import {SCREEN} from '../../Navigation/Constants/screens';
 import {useForm} from 'react-hook-form';
 import {emailRegExp, passwordRegExp} from '../../Utils/helpers';
+import {useSignUpMutation} from '../../Api/Authentication';
+import {useDispatch} from '../../Utils/Hooks';
+import {setCredentials} from '../../Store/AuthSlice';
 
 const SignUp = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const {control, handleSubmit, watch} = useForm();
   const pwd = watch('password');
-  const onSubmit = (data: any) => {
-    console.log(data);
-    navigation.navigate(SCREEN.CONFIRM_EMAIL);
+  const [signUp] = useSignUpMutation();
+  const onSubmit = async () => {
+    try {
+      if (control._formValues.password !== control._formValues.passwordRepeat) {
+        Alert.alert('Passwords don`t match');
+        return;
+      }
+      const newUserData = await signUp({
+        email: control._formValues.email,
+        password: control._formValues.password,
+      });
+      dispatch(setCredentials({...newUserData}));
+      navigation.navigate(SCREEN.SIGN_IN);
+    } catch (error) {
+      console.log('error', error);
+    }
   };
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Create an account</Text>
       <CustomInput
-        name={'Username'}
-        control={control}
-        placeholder={'Username'}
-        rules={{
-          required: 'Username is require',
-          minLength: {
-            value: 5,
-            message: 'Username should be minimum 5 characters long',
-          },
-          maxLength: {
-            value: 25,
-            message: 'Username should be minimum 25 characters long',
-          },
-        }}
-      />
-      <CustomInput
         placeholder={'Email'}
-        name={'Email'}
+        name={'email'}
         control={control}
         rules={{pattern: {value: emailRegExp, message: 'Email is not valid'}}}
       />
       <CustomInput
         placeholder={'Password'}
-        name={'Password'}
+        name={'password'}
         control={control}
         secureTextEntry={true}
         rules={{
@@ -58,7 +59,7 @@ const SignUp = () => {
       />
       <CustomInput
         placeholder={'PasswordRepeat'}
-        name={'PasswordRepeat'}
+        name={'passwordRepeat'}
         secureTextEntry={true}
         control={control}
         rules={{
@@ -71,12 +72,6 @@ const SignUp = () => {
         title={'Sign In'}
         onPress={() => navigation.navigate(SCREEN.SIGN_IN)}
         type="SECONDARY"
-      />
-      <CustomButton
-        title={'Sign in with google'}
-        onPress={() => alert('Google')}
-        bgColor={theme.colors.bgColor}
-        fgColor={theme.colors.fgColor}
       />
     </View>
   );

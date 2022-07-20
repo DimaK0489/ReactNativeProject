@@ -11,7 +11,6 @@ import {useForm} from 'react-hook-form';
 import {useDispatch} from '../../Utils/Hooks';
 import {useLoginMutation} from '../../Api/Authentication';
 import {setCredentials} from '../../Store/AuthSlice';
-import {STACK, stacks} from '../../Navigation/Constants/stacks';
 import CustomCheckbox from '../../Components/CustomCheckbox';
 import Preloader from '../../Components/Preloader';
 
@@ -23,11 +22,18 @@ const Login = () => {
   const {control, handleSubmit} = useForm();
   const onSubmit = async () => {
     try {
-      const userData = await login(control._formValues).unwrap();
+      const userData = await login({
+        email: control._formValues.email,
+        password: control._formValues.password,
+        rememberMe: control._formValues.rememberMe,
+      }).unwrap();
       dispatch(setCredentials({...userData}));
-      navigation.navigate(stacks[STACK.HOME]);
+      // await AsyncStorage.setItem(
+      //   'token',
+      //   (userData as {data: {token: string}}).data.token,
+      // );
     } catch (err) {
-      Alert.alert('Не удалось войти', 'Неправильное имя или пароль');
+      Alert.alert('Failed to login', 'Wrong username or password');
       console.log('error', err);
     }
   };

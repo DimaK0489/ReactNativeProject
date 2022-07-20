@@ -30,9 +30,10 @@ const baseQueryWithReauth: BaseQueryFn<
     console.log('sending refresh token');
     const refreshResult = await baseQuery('/refreshToken', api, extraOptions);
     if (refreshResult.data) {
-      // @ts-ignore
-      const user = api.getState().auth.user;
-      api.dispatch(setCredentials({token: refreshResult.data as string, user}));
+      const access_token = (api.getState() as RootState).auth.token;
+      api.dispatch(
+        setCredentials({token: refreshResult.data as string, access_token}),
+      );
       //api.dispatch(setCredentials({...refreshResult.data as string, user}));
       result = await baseQuery(args, api, extraOptions);
     } else {

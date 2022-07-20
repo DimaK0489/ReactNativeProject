@@ -1,6 +1,9 @@
-export type SigInData = {
-  userName: string;
-  password: string | number;
-};
-
-
+export interface RegistrationDataType {
+  email: string;
+  password: string;
+}
+export interface LoginType {
+  email: string;
+  password: string;
+  rememberMe?: boolean;
+}
