@@ -43,6 +43,7 @@ const baseQueryWithReauth: BaseQueryFn<
   return result;
 };
 export const apiSlice = createApi({
+  tagTypes: ['Packs'],
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
 });

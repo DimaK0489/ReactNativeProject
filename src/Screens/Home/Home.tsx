@@ -1,15 +1,16 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 import {Button} from 'react-native-paper';
-import {STACK, stacks} from '../../Navigation/Constants/stacks';
+import {SCREEN} from '../../Navigation/Constants/screens';
+import {useNavigation} from '@react-navigation/native';
 
-// @ts-ignore
-const Home = ({navigation}) => {
+const Home = () => {
+  const navigation = useNavigation();
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate(stacks[STACK.AUTH])}>
-        Go to Authorized
+      <Button onPress={() => navigation.navigate(SCREEN.PACKS)}>
+        Go to Packs
       </Button>
     </View>
   );

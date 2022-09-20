@@ -5,6 +5,7 @@ import {apiSlice} from '../Api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import persistReducer from 'redux-persist/es/persistReducer';
 import {persistStore} from 'redux-persist';
+import {packsApi} from '../Api/Packs';
 
 const persistConfig = {
   key: 'root',
